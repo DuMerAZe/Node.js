@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- 
+      浏览器收到 HTML 响应内容后，就要开始从上到下依次解析，
+      当在解析过程中发现  link  script  img  iframe  video  audio
+      等具有  src 或者  href（link）  属性标签（具有外链的资源）的时候，浏览器会自动对这些资源发起新的请求
+      为了方便统一处理这些静态资源，可以将所有静态资源都存放到public目录中
+    -->
+
+    <!-- 
+      注意：在服务端中，文件的路径不写成相对路径，因为这个时候所有的资源都是通过 url 标识来获取的
+      我的服务器开放了  /public/  目录
+      所以这里的请求路径都写成 ： /pubilc/...
+      / 在这里就是跟路径的意思
+      浏览器在真正发请求的时候会自动将  http://127.0.0.1:3000  拼上
+
+      不要再想文件路径了，把所有文件路径都想象成 url
+    -->
+    <link rel="stylesheet" href="/public/lib/bootstrap/dist/css/bootstrap.css">
+  </head>
+  <body>
+    <div class="container">
+
+    <hr>
+    <a  href="/post" class="btn btn-success">发表留言</a>
+    <hr>
+    <ul class="list-group">
+      {{each comments}}
+      <li class="list-group-item">{{$value.name}}Say:{{$value.message}}
+        <span class="pull-right" style="float: right">{{$value.dateTime}}</span>
+      </li>
+      {{/each}}
+    </ul>
+    </div>
+  </body>
+</html>
